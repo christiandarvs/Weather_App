@@ -1,10 +1,21 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class WeatherScreen extends StatefulWidget {
   final double latitude;
   final double longitude;
+  final String cityName;
+  final String countryName;
+  final double temperature;
   const WeatherScreen(
-      {super.key, required this.latitude, required this.longitude});
+      {super.key,
+      required this.latitude,
+      required this.longitude,
+      required this.cityName,
+      required this.countryName,
+      required this.temperature});
 
   @override
   State<WeatherScreen> createState() => _WeatherScreenState();
@@ -12,17 +23,33 @@ class WeatherScreen extends StatefulWidget {
 
 class _WeatherScreenState extends State<WeatherScreen> {
   late TextEditingController cityController;
-  String? cityName;
+  // String? cityName;
+  // late double temperature;
+  // late String cityName;
+  // late String countryName;
+  // late String weatherDesc;
 
   @override
   void initState() {
     super.initState();
     cityController = TextEditingController();
+    getLocation();
+  }
+
+  void getLocation() async {
+    // var response = await http.get(Uri.parse(
+    //     'https://api.openweathermap.org/data/2.5/weather?q=Paris&appid=057e14416124ad6da322d52d049ae9d7&units=metric'));
+    // final jsonData = jsonDecode(response.body);
+    // temperature = await jsonData['main']['temp'];
+    // cityName = await jsonData['name'];
+    // countryName = await jsonData['sys']['country'];
+    // weatherDesc = await jsonData['weather'][0]['description'];
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15),
@@ -46,7 +73,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
                 controller: cityController,
                 onChanged: (value) {
                   setState(() {
-                    cityName = value;
+                    // cityName = value;
                   });
                 },
                 leading: const Icon(
@@ -58,32 +85,40 @@ class _WeatherScreenState extends State<WeatherScreen> {
                 height: 20,
               ),
               SizedBox(
-                height: 140,
+                height: 130,
                 child: InkWell(
                   onTap: () {},
-                  child: const Card(
-                    color: Color(0xff333742),
+                  child: Card(
+                    color: const Color(0xff333742),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
-                            Text(
+                            const Text(
                               '⛅',
                               style: TextStyle(fontSize: 65),
                             ),
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.end,
                               children: [
-                                Text('19°C'),
+                                Text(
+                                    '${widget.temperature.toStringAsFixed(0)}°C',
+                                    style: GoogleFonts.poppins(
+                                        color: Colors.white,
+                                        fontSize: 25,
+                                        fontWeight: FontWeight.bold)),
                                 Row(
                                   children: [
-                                    Icon(Icons.location_pin),
-                                    SizedBox(
-                                      width: 10,
+                                    const Icon(Icons.location_pin),
+                                    const SizedBox(
+                                      width: 5,
                                     ),
-                                    Text('Helsinki, Finland'),
+                                    Text(
+                                        '${widget.cityName}, ${widget.countryName}',
+                                        style: GoogleFonts.poppins(
+                                            color: Colors.white, fontSize: 20)),
                                   ],
                                 )
                               ],
@@ -108,8 +143,52 @@ class _WeatherScreenState extends State<WeatherScreen> {
                   )
                 ],
               ),
-              Text('${widget.latitude}'),
-              Text('${widget.longitude}'),
+              const SizedBox(
+                height: 10,
+              ),
+              Expanded(
+                child: ListView.separated(
+                  separatorBuilder: (context, index) {
+                    return const SizedBox(
+                      height: 5,
+                    );
+                  },
+                  itemCount: 5,
+                  itemBuilder: (context, index) {
+                    return const SizedBox(
+                      height: 110,
+                      child: Card(
+                        color: Color(0xff333742),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Row(
+                                  children: [
+                                    Text('{temperature.}°C'),
+                                    SizedBox(
+                                      width: 10,
+                                    ),
+                                    Text('weatherDesc'),
+                                  ],
+                                ),
+                                Text('cityName, countryName')
+                              ],
+                            ),
+                            Text(
+                              '⛅',
+                              style: TextStyle(fontSize: 65),
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              )
             ],
           ),
         ),
