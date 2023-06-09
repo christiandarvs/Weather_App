@@ -43,7 +43,6 @@ class _LoadingScreenState extends State<LoadingScreen> {
           latitude: latitude,
           longitude: longitude,
           cityName: cityName,
-          countryName: countryName,
           temperature: temperature,
         ),
       ),
