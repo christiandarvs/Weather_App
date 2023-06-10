@@ -8,8 +8,8 @@ class Weather {
   late double windSpeed;
   late int visibility;
   late int humidity;
-  late double minTemp;
-  late double maxTemp;
+  late num minTemp;
+  late num maxTemp;
   // late int condition;
   Weather(
       {required this.cityName,

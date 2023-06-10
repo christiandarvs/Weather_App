@@ -30,17 +30,17 @@ class _LoadingScreenState extends State<LoadingScreen> {
     var jsonData = jsonDecode(response.body);
 
     debugPrint('$jsonData');
-    var temperature = jsonData['main']['temp'];
-    var cityName = jsonData['name'];
-    var countryName = jsonData['sys']['country'];
-    var weatherDesc = jsonData['weather'][0]['description'];
-    var condition = jsonData['weather'][0]['id'];
-    var pressure = jsonData['main']['pressure'];
-    var windSpeed = jsonData['wind']['speed'];
-    var visibility = jsonData['visibility'];
-    var humidity = jsonData['main']['humidity'];
-    var minTemp = jsonData['main']['temp_min'];
-    var maxTemp = jsonData['main']['temp_max'];
+    double temperature = jsonData['main']['temp'];
+    String cityName = jsonData['name'];
+    String countryName = jsonData['sys']['country'];
+    String weatherDesc = jsonData['weather'][0]['description'];
+    int condition = jsonData['weather'][0]['id'];
+    int pressure = jsonData['main']['pressure'];
+    double windSpeed = jsonData['wind']['speed'];
+    int visibility = jsonData['visibility'];
+    int humidity = jsonData['main']['humidity'];
+    num minTemp = jsonData['main']['temp_min'];
+    num maxTemp = jsonData['main']['temp_max'];
 
     Weather weather = Weather(
         countryName: countryName,
@@ -82,8 +82,8 @@ class _LoadingScreenState extends State<LoadingScreen> {
     double windSpeed,
     int visibility,
     int humidity,
-    double minTemp,
-    double maxTemp,
+    num minTemp,
+    num maxTemp,
   ) async {
     await Navigator.pushReplacement(
       context,

@@ -20,9 +20,9 @@ class WeatherScreen extends StatefulWidget {
   final double windSpeed;
   final int visibility;
   final int humidity;
-  final double minTemp;
   final String weatherDesc;
-  final double maxTemp;
+  final num minTemp;
+  final num maxTemp;
 
   const WeatherScreen({
     super.key,
