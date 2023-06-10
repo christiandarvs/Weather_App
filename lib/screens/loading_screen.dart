@@ -35,14 +35,39 @@ class _LoadingScreenState extends State<LoadingScreen> {
     var countryName = jsonData['sys']['country'];
     var weatherDesc = jsonData['weather'][0]['description'];
     var condition = jsonData['weather'][0]['id'];
+    var pressure = jsonData['main']['pressure'];
+    var windSpeed = jsonData['wind']['speed'];
+    var visibility = jsonData['visibility'];
+    var humidity = jsonData['main']['humidity'];
+    var minTemp = jsonData['main']['temp_min'];
+    var maxTemp = jsonData['main']['temp_max'];
+
     Weather weather = Weather(
         countryName: countryName,
         cityName: cityName,
         weatherDesc: weatherDesc,
         condition: condition,
-        temperature: temperature);
-    await navigateToWeatherScreen(location.latitude, location.longitude,
-        cityName, countryName, temperature, weather.getWeatherIcon(condition));
+        temperature: temperature,
+        pressure: pressure,
+        windSpeed: windSpeed,
+        visibility: visibility,
+        minTemp: minTemp,
+        maxTemp: maxTemp,
+        humidity: humidity);
+    await navigateToWeatherScreen(
+        location.latitude,
+        location.longitude,
+        cityName,
+        countryName,
+        temperature,
+        weather.getWeatherIcon(condition),
+        weatherDesc,
+        pressure,
+        windSpeed,
+        visibility,
+        humidity,
+        minTemp,
+        maxTemp);
 
     // sub-countries
     // const apiKey = '057e14416124ad6da322d52d049ae9d7';
@@ -69,21 +94,37 @@ class _LoadingScreenState extends State<LoadingScreen> {
   }
 
   Future<void> navigateToWeatherScreen(
-      double latitude,
-      double longitude,
-      String cityName,
-      String countryName,
-      double temperature,
-      String weatherIcon) async {
+    double latitude,
+    double longitude,
+    String cityName,
+    String countryName,
+    double temperature,
+    String weatherIcon,
+    String weatherDesc,
+    int pressure,
+    double windSpeed,
+    int visibility,
+    int humidity,
+    double minTemp,
+    double maxTemp,
+  ) async {
     await Navigator.push(
       context,
       MaterialPageRoute(
         builder: (context) => WeatherScreen(
+          countryName: countryName,
           weatherIcon: weatherIcon,
           latitude: latitude,
           longitude: longitude,
           cityName: cityName,
           temperature: temperature,
+          pressure: pressure,
+          windSpeed: windSpeed,
+          visibility: visibility,
+          humidity: humidity,
+          maxTemp: maxTemp,
+          weatherDesc: weatherDesc,
+          minTemp: minTemp,
         ),
       ),
     );
