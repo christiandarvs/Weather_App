@@ -37,22 +37,33 @@ class _LocationScreenState extends State<LocationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: Text(
+          '${widget.cityName}, ${widget.countryName}',
+          style: GoogleFonts.poppins(fontWeight: FontWeight.bold),
+        ),
+      ),
       body: SafeArea(
           child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 12),
         child: Center(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
-            // mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text('${widget.cityName}, ${widget.countryName}'),
               Text(
                 widget.weatherIcon,
                 style: const TextStyle(fontSize: 100),
                 textAlign: TextAlign.center,
               ),
-              const Text(''),
+              Text(
+                '${widget.weatherDescription[0].toUpperCase()}${widget.weatherDescription.substring(1)}',
+                textAlign: TextAlign.center,
+                style: GoogleFonts.poppins(fontSize: 20),
+              ),
+              const SizedBox(
+                height: 5,
+              ),
               Text(
                 '${widget.temperature.toStringAsFixed(0)}°C',
                 style: GoogleFonts.poppins(

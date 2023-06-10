@@ -68,29 +68,6 @@ class _LoadingScreenState extends State<LoadingScreen> {
         humidity,
         minTemp,
         maxTemp);
-
-    // sub-countries
-    // const apiKey = '057e14416124ad6da322d52d049ae9d7';
-    // final cities = ['Japan', 'Korea', 'Paris', 'Thailand', 'China'];
-
-    // for (final city in cities) {
-    //   final url =
-    //       'https://api.openweathermap.org/data/2.5/weather?q=$city&appid=$apiKey&units=metric';
-    //   final response = await http.get(Uri.parse(url));
-
-    //   if (response.statusCode == 200) {
-    //     final weatherJson = json.decode(response.body);
-    //     final weather = Weather(
-    //       cityName: city,
-    //       temperature: weatherJson['main']['temp'].toDouble(),
-    //       weatherDesc: weatherJson['weather'][0]['description'],
-    //     );
-    //   } else {
-    //     print('Failed to fetch weather data for $city');
-    //   }
-    //   await navigateToWeatherScreen(location.latitude, location.longitude,
-    //       cityName, countryName, temperature);
-    // }
   }
 
   Future<void> navigateToWeatherScreen(
@@ -108,7 +85,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
     double minTemp,
     double maxTemp,
   ) async {
-    await Navigator.push(
+    await Navigator.pushReplacement(
       context,
       MaterialPageRoute(
         builder: (context) => WeatherScreen(
