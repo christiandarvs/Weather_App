@@ -1,16 +1,16 @@
 class Weather {
   late String cityName;
   late String weatherDesc;
-  late double temperature;
+  late num temperature;
   late String countryName;
-  late int condition;
-  late int pressure;
-  late double windSpeed;
-  late int visibility;
-  late int humidity;
+  late num condition;
+  late num pressure;
+  late num windSpeed;
+  late num visibility;
+  late num humidity;
   late num minTemp;
   late num maxTemp;
-  // late int condition;
+
   Weather(
       {required this.cityName,
       required this.countryName,
@@ -24,7 +24,7 @@ class Weather {
       required this.minTemp,
       required this.maxTemp});
 
-  String getWeatherIcon(int condition) {
+  String getWeatherIcon(num condition) {
     if (condition < 300) {
       return '🌩';
     } else if (condition < 400) {

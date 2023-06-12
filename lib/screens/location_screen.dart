@@ -5,11 +5,11 @@ class LocationScreen extends StatefulWidget {
   final String cityName;
   final String countryName;
   final String weatherIcon;
-  final double temperature;
-  final int pressure;
-  final double windSpeed;
-  final int visibility;
-  final int humidity;
+  final num temperature;
+  final num pressure;
+  final num windSpeed;
+  final num visibility;
+  final num humidity;
   final num minTemp;
   final num maxTemp;
   final String weatherDescription;
